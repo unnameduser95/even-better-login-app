@@ -3,7 +3,7 @@ import { TextInput, Text, StyleSheet, View, Dimensions, Image, TouchableOpacity,
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
-console.log(screenWidth, screenHeight);
+console.log("Device dimensions:", screenWidth, screenHeight);
 
 export default class Login extends Component {
   render() {
