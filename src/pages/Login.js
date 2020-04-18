@@ -6,7 +6,37 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 console.log("Device dimensions:", screenWidth, screenHeight);
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: null,
+      password: null,
+    };
+  }
+
+  // componentDidMount() {
+  //   const username = "username";
+  //   const password = "password";
+  //   this.setState({username: username, password: password});
+  //   console.log(username, password);
+  // }
+
+  usernameChange = (text) => {
+    this.setState({username: text});
+  }
+
+  passwordChange = (text) => {
+    this.setState({password: text});
+  }
+
+  onPressButton = () => {
+    console.log("Button pressed");
+    // console.log(this.state);
+  }
+
   render() {
+    console.log("Rendering");
+    // console.log(this.state);
     return (
       <KeyboardAvoidingView style={styles.container} behavior={"padding"} contentContainerStyle={styles.container} enabled>
       {/* <View style={styles.container}> */}
@@ -15,7 +45,8 @@ export default class Login extends Component {
           placeholder={"Username"}
           autoCorrect={false}
           autoCapitalize={"none"}
-          textContentType={"username"}>
+          textContentType={"username"}
+          onChangeText={this.usernameChange}>
         </TextInput>
         <TextInput 
           style={styles.field} 
@@ -23,9 +54,10 @@ export default class Login extends Component {
           autoCorrect={false} 
           autoCapitalize={"none"} 
           textContentType={"password"}
-          secureTextEntry={true}>
+          secureTextEntry={true}
+          onChangeText={this.passwordChange}>
         </TextInput>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={this.onPressButton}>
           <Text style={styles.buttonText}>Sign in</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.smallButton}>
