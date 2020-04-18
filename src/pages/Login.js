@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Text, StyleSheet, View, Dimensions, Image } from 'react-native';
+import { TextInput, Text, StyleSheet, View, Dimensions, Image } from 'react-native';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -10,6 +10,8 @@ export default class Login extends Component {
     return (
       <View style={styles.container}>
         <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
+        <TextInput style={styles.field} placeholder={"Username"}></TextInput>
+        <TextInput style={styles.field} placeholder={"Password"}></TextInput>
       </View>
     )
   }
@@ -23,5 +25,12 @@ const styles = StyleSheet.create({
   logo: {
     marginTop: screenWidth * 0.30,
     height: 100,
+  },
+  field: {
+    marginTop: 50,
+    width: screenWidth * 0.7,
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
   }
 });
