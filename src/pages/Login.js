@@ -11,7 +11,7 @@ export default class Login extends Component {
       <KeyboardAvoidingView style={styles.container} behavior={"position"} contentContainerStyle={styles.container} enabled>
       {/* <View style={styles.container}> */}
         <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
-        <TextInput style={styles.field} placeholder={"Username"} autoCorrect={false} autoCapitalize={"none"}></TextInput>
+        <TextInput style={styles.field} placeholder={"Username"} autoCorrect={false} autoCapitalize={"none"} textContentType={"username"}></TextInput>
         <TextInput style={styles.field} placeholder={"Password"} autoCorrect={false} autoCapitalize={"none"} textContentType={"password"}></TextInput>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Sign in</Text>
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
   },
   field: {
     marginTop: 50,
+    paddingLeft: 10,
     width: screenWidth * 0.7,
     height: 40,
     borderColor: "gray",
