@@ -11,8 +11,20 @@ export default class Login extends Component {
       <KeyboardAvoidingView style={styles.container} behavior={"position"} contentContainerStyle={styles.container} enabled>
       {/* <View style={styles.container}> */}
         <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
-        <TextInput style={styles.field} placeholder={"Username"} autoCorrect={false} autoCapitalize={"none"} textContentType={"username"}></TextInput>
-        <TextInput style={styles.field} placeholder={"Password"} autoCorrect={false} autoCapitalize={"none"} textContentType={"password"}></TextInput>
+        <TextInput style={styles.field}
+          placeholder={"Username"}
+          autoCorrect={false}
+          autoCapitalize={"none"}
+          textContentType={"username"}>
+        </TextInput>
+        <TextInput 
+          style={styles.field} 
+          placeholder={"Password"} 
+          autoCorrect={false} 
+          autoCapitalize={"none"} 
+          textContentType={"password"}
+          secureTextEntry={true}>
+        </TextInput>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Sign in</Text>
         </TouchableOpacity>
@@ -44,6 +56,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: "gray",
     borderWidth: 1,
+    borderRadius: 5,
   },
   button: {
     marginTop: 50,
@@ -59,7 +72,7 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   smallButton: {
-    height: 20,
+    height: 30,
     justifyContent: "center",
     alignItems: "center",
   },
