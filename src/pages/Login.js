@@ -14,13 +14,6 @@ export default class Login extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   const username = "username";
-  //   const password = "password";
-  //   this.setState({username: username, password: password});
-  //   console.log(username, password);
-  // }
-
   usernameChange = (text) => {
     this.setState({username: text});
   }
