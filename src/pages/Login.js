@@ -8,7 +8,7 @@ console.log("Device dimensions:", screenWidth, screenHeight);
 export default class Login extends Component {
   render() {
     return (
-      <KeyboardAvoidingView style={styles.container} behavior={"position"} contentContainerStyle={styles.container} enabled>
+      <KeyboardAvoidingView style={styles.container} behavior={"padding"} contentContainerStyle={styles.container} enabled>
       {/* <View style={styles.container}> */}
         <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
         <TextInput style={styles.field}
@@ -38,15 +38,22 @@ export default class Login extends Component {
       </KeyboardAvoidingView>
     )
   }
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
+    width: screenWidth,
+    height: screenHeight,
+  },
+  darkContainer: {
+    backgroundColor: "#000000"
+  },
+  lightContainer: {
+    backgroundColor: "#ffffff",
   },
   logo: {
-    marginTop: screenWidth * 0.40,
     height: 100,
   },
   field: {
