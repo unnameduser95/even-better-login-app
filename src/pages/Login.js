@@ -68,11 +68,12 @@ const styles = StyleSheet.create({
   },
   logo: {
     height: 100,
+    width: 275,
   },
   field: {
     marginTop: 50,
     paddingLeft: 10,
-    width: screenWidth * 0.7,
+    width: 275,
     height: 40,
     borderRadius: 5,
     color: "#000000"
