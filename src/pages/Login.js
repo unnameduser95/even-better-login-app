@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { TextInput, Text, StyleSheet, Dimensions, Image, TouchableOpacity, KeyboardAvoidingView, StatusBar } from 'react-native';
-import { Appearance, AppearanceProvider, useColorScheme } from 'react-native-appearance';
+import { TextInput, Text, StyleSheet, Dimensions, Image, TouchableOpacity, KeyboardAvoidingView, StatusBar, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -18,40 +18,42 @@ export default function Login(props) {
 
   return (
     <AppearanceProvider>
-      <KeyboardAvoidingView style={[styles.container, themeContainer]} behavior={"padding"} enabled>
-      {/* <View style={styles.container}> */}
-        <StatusBar backgroundColor={themeStatusBar === "dark-content" ? "#ffffff" : "#000000"} barStyle={themeStatusBar} hidden={false} />
-        <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
-        <TextInput style={[styles.field, themeField]}
-          placeholder={"Email"}
-          placeholderTextColor={themePlaceholder}
-          autoCorrect={false}
-          autoCapitalize={"none"}
-          textContentType={"emailAddress"}
-          onChangeText={(text) => setUsername(text)}
-          keyboardType={"email-address"}>
-        </TextInput>
-        <TextInput 
-          style={[styles.field, themeField]} 
-          placeholder={"Password"} 
-          placeholderTextColor={themePlaceholder}
-          autoCorrect={false} 
-          autoCapitalize={"none"} 
-          textContentType={"password"}
-          secureTextEntry={true}
-          onChangeText={(text) => setPassword(text)}>
-        </TextInput>
-        <TouchableOpacity style={styles.button} onPress={() => console.log(username, password)}>
-          <Text style={styles.buttonText}>Sign in</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.smallButton}>
-          <Text style={styles.smallButtonText}>Forgot password?</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.smallButton}>
-          <Text style={styles.smallButtonText}>Don't have an account? Sign up</Text>
-        </TouchableOpacity>
-      {/* </View> */}
-      </KeyboardAvoidingView>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <KeyboardAvoidingView style={[styles.container, themeContainer]} behavior={"padding"} enabled>
+        {/* <View style={styles.container}> */}
+          <StatusBar backgroundColor={themeStatusBar === "dark-content" ? "#ffffff" : "#000000"} barStyle={themeStatusBar} hidden={false} />
+          <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
+          <TextInput style={[styles.field, themeField]}
+            placeholder={"Email"}
+            placeholderTextColor={themePlaceholder}
+            autoCorrect={false}
+            autoCapitalize={"none"}
+            textContentType={"emailAddress"}
+            onChangeText={(text) => setUsername(text)}
+            keyboardType={"email-address"}>
+          </TextInput>
+          <TextInput 
+            style={[styles.field, themeField]} 
+            placeholder={"Password"} 
+            placeholderTextColor={themePlaceholder}
+            autoCorrect={false} 
+            autoCapitalize={"none"} 
+            textContentType={"password"}
+            secureTextEntry={true}
+            onChangeText={(text) => setPassword(text)}>
+          </TextInput>
+          <TouchableOpacity style={styles.button} onPress={() => console.log(username, password)}>
+            <Text style={styles.buttonText}>Sign in</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.smallButton}>
+            <Text style={styles.smallButtonText}>Forgot password?</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.smallButton}>
+            <Text style={styles.smallButtonText}>Don't have an account? Sign up</Text>
+          </TouchableOpacity>
+        {/* </View> */}
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
     </AppearanceProvider>
   )
 };
@@ -105,7 +107,6 @@ const styles = StyleSheet.create({
   smallButton: {
     height: 30,
     justifyContent: "center",
-    alignItems: "center",
   },
   smallButtonText: {
     color: "gray",
