@@ -18,17 +18,18 @@ export default function Login(props) {
 
   return (
     <AppearanceProvider>
-      <KeyboardAvoidingView style={[styles.container, themeContainer]} behavior={"padding"} contentContainerStyle={[styles.container, themeContainer]} enabled>
+      <KeyboardAvoidingView style={[styles.container, themeContainer]} behavior={"padding"} enabled>
       {/* <View style={styles.container}> */}
         <StatusBar backgroundColor={themeStatusBar === "dark-content" ? "#ffffff" : "#000000"} barStyle={themeStatusBar} hidden={false} />
         <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
         <TextInput style={[styles.field, themeField]}
-          placeholder={"Username"}
+          placeholder={"Email"}
           placeholderTextColor={themePlaceholder}
           autoCorrect={false}
           autoCapitalize={"none"}
-          textContentType={"username"}
-          onChangeText={(text) => setUsername(text)}>
+          textContentType={"emailAddress"}
+          onChangeText={(text) => setUsername(text)}
+          keyboardType={"email-address"}>
         </TextInput>
         <TextInput 
           style={[styles.field, themeField]} 
@@ -107,6 +108,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   smallButtonText: {
-    color: "gray"
+    color: "gray",
+    fontWeight: "bold",
   }
 });
