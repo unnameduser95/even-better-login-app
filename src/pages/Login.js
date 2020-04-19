@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextInput, Text, StyleSheet, Dimensions, Image, TouchableOpacity, KeyboardAvoidingView, StatusBar, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { TextInput, Text, StyleSheet, Dimensions, Image, TouchableOpacity, KeyboardAvoidingView, StatusBar, Keyboard, TouchableWithoutFeedback, View } from 'react-native';
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -48,7 +48,7 @@ export default function Login(props) {
           <TouchableOpacity style={styles.smallButton}>
             <Text style={styles.smallButtonText}>Forgot password?</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.smallButton}>
+          <TouchableOpacity style={[styles.smallButton]}>
             <Text style={styles.smallButtonText}>Don't have an account? Sign up</Text>
           </TouchableOpacity>
         {/* </View> */}
@@ -80,15 +80,15 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     width: 275,
     height: 40,
-    borderRadius: 5,
-    color: "#000000"
+    borderBottomWidth: 2,
+    borderBottomColor: "gray"
   },
   darkField: {
-    backgroundColor: "#3b3b3b",
+    // backgroundColor: "#3b3b3b",
     color: "#ffffff",
   },
   lightField: {
-    backgroundColor: "#d9d9d9",
+    // backgroundColor: "#d9d9d9",
     color: "#000000",
   },
   button: {
