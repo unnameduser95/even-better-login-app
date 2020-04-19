@@ -52,7 +52,7 @@ export default function Login(props) {
               style={{justifyContent: "center", alignItems: "center", height: 40, width: 40}}
               onPress={() => setHidePassword(!hidePassword)}
             >
-              <Ionicons name={hidePassword === true ? "md-eye" : "md-eye-off"} color="gray" size={20} />
+              <Ionicons name={hidePassword === true ? "md-eye" : "md-eye-off"} color="gray" size={22} />
             </TouchableOpacity>
           </View>
           <TouchableOpacity style={styles.button} onPress={() => console.log(username, password)}>
