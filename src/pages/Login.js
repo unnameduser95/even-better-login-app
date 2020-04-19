@@ -7,26 +7,31 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 console.log("Device dimensions:", screenWidth, screenHeight);
 
 export default function Login(props) {
-  const [username, setUsername] = useState("");
+  const colorScheme = useColorScheme();
+  const themeContainer = colorScheme === "dark" ? styles.darkContainer : styles.lightContainer;
+  const themeField = colorScheme === "dark" ? styles.darkField : styles.lightField;
+  const themePlaceholder = colorScheme === "dark" ? "#c4c4c4" : "gray";
+  
+  const [username, setUsername] = useState("");  // useState hook returns variable and function
   const [password, setPassword] = useState("");
 
   return (
     <AppearanceProvider>
-      <KeyboardAvoidingView style={styles.container} behavior={"padding"} contentContainerStyle={styles.container} enabled>
+      <KeyboardAvoidingView style={[styles.container, themeContainer]} behavior={"padding"} contentContainerStyle={[styles.container, themeContainer]} enabled>
       {/* <View style={styles.container}> */}
         <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
-        <TextInput style={styles.field}
+        <TextInput style={[styles.field, themeField]}
           placeholder={"Username"}
-          placeholderTextColor={"gray"}
+          placeholderTextColor={themePlaceholder}
           autoCorrect={false}
           autoCapitalize={"none"}
           textContentType={"username"}
           onChangeText={(text) => setUsername(text)}>
         </TextInput>
         <TextInput 
-          style={styles.field} 
+          style={[styles.field, themeField]} 
           placeholder={"Password"} 
-          placeholderTextColor={"gray"}
+          placeholderTextColor={themePlaceholder}
           autoCorrect={false} 
           autoCapitalize={"none"} 
           textContentType={"password"}
@@ -69,9 +74,16 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     width: screenWidth * 0.7,
     height: 40,
-    backgroundColor: "#d9d9d9",
     borderRadius: 5,
     color: "#000000"
+  },
+  darkField: {
+    backgroundColor: "#3b3b3b",
+    color: "#ffffff",
+  },
+  lightField: {
+    backgroundColor: "#d9d9d9",
+    color: "#000000",
   },
   button: {
     marginTop: 50,
