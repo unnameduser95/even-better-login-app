@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextInput, Text, StyleSheet, Dimensions, Image, TouchableOpacity, KeyboardAvoidingView, StatusBar, Keyboard, TouchableWithoutFeedback, View } from 'react-native';
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
+import { Ionicons } from '@expo/vector-icons';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -15,6 +16,7 @@ export default function Login(props) {
   
   const [username, setUsername] = useState("");  // useState hook returns variable and function
   const [password, setPassword] = useState("");
+  const [hidePassword, setHidePassword] = useState(true);
 
   return (
     <AppearanceProvider>
@@ -23,7 +25,7 @@ export default function Login(props) {
         {/* <View style={styles.container}> */}
           <StatusBar backgroundColor={themeStatusBar === "dark-content" ? "#ffffff" : "#000000"} barStyle={themeStatusBar} hidden={false} />
           <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
-          <TextInput style={[styles.field, themeField]}
+          <TextInput style={[styles.field, styles.fieldMargin, themeField]}
             placeholder={"Email"}
             placeholderTextColor={themePlaceholder}
             autoCorrect={false}
@@ -32,16 +34,24 @@ export default function Login(props) {
             onChangeText={(text) => setUsername(text)}
             keyboardType={"email-address"}>
           </TextInput>
-          <TextInput 
-            style={[styles.field, themeField]} 
-            placeholder={"Password"} 
-            placeholderTextColor={themePlaceholder}
-            autoCorrect={false} 
-            autoCapitalize={"none"} 
-            textContentType={"password"}
-            secureTextEntry={true}
-            onChangeText={(text) => setPassword(text)}>
-          </TextInput>
+          <View style={[styles.passwordContainer, styles.fieldMargin]}>
+            <TextInput 
+              style={[styles.field, themeField, {width: 250}]} 
+              placeholder={"Password"} 
+              placeholderTextColor={themePlaceholder}
+              autoCorrect={false} 
+              autoCapitalize={"none"} 
+              textContentType={"password"}
+              secureTextEntry={hidePassword}
+              onChangeText={(text) => setPassword(text)}>
+            </TextInput>
+            <TouchableOpacity 
+              style={{justifyContent: "center", alignItems: "center", height: 40, width: 25}}
+              onPress={() => setHidePassword(!hidePassword)}
+            >
+              <Ionicons name="md-eye" color="gray" size={20} />
+            </TouchableOpacity>
+          </View>
           <TouchableOpacity style={styles.button} onPress={() => console.log(username, password)}>
             <Text style={styles.buttonText}>Sign in</Text>
           </TouchableOpacity>
@@ -75,8 +85,14 @@ const styles = StyleSheet.create({
     height: 100,
     width: 275,
   },
-  field: {
+  fieldMargin: {
     marginTop: 35,
+  },
+  passwordContainer: {
+    flexDirection: "row",
+    width: 275,
+  },
+  field: {
     paddingLeft: 10,
     width: 275,
     height: 40,
