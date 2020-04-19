@@ -3,6 +3,8 @@ import { TextInput, Text, StyleSheet, Dimensions, Image, TouchableOpacity, Keybo
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import { Ionicons } from '@expo/vector-icons';
 import { Linking } from 'expo';
+import * as ScreenOrientation from 'expo-screen-orientation';
+ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
