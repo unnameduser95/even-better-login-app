@@ -29,13 +29,13 @@ export default class Login extends Component {
 
   render() {
     console.log("Rendering");
-    // console.log(this.state);
     return (
       <KeyboardAvoidingView style={styles.container} behavior={"padding"} contentContainerStyle={styles.container} enabled>
       {/* <View style={styles.container}> */}
         <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
         <TextInput style={styles.field}
           placeholder={"Username"}
+          placeholderTextColor={"gray"}
           autoCorrect={false}
           autoCapitalize={"none"}
           textContentType={"username"}
@@ -44,6 +44,7 @@ export default class Login extends Component {
         <TextInput 
           style={styles.field} 
           placeholder={"Password"} 
+          placeholderTextColor={"gray"}
           autoCorrect={false} 
           autoCapitalize={"none"} 
           textContentType={"password"}
@@ -88,6 +89,7 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: "#d9d9d9",
     borderRadius: 5,
+    color: "#000000"
   },
   button: {
     marginTop: 50,
