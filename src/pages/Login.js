@@ -1,35 +1,17 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { TextInput, Text, StyleSheet, Dimensions, Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { Appearance, AppearanceProvider, useColorScheme } from 'react-native-appearance';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 console.log("Device dimensions:", screenWidth, screenHeight);
 
-export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: null,
-      password: null,
-    };
-  }
+export default function Login(props) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-  usernameChange = (text) => {
-    this.setState({username: text});
-  }
-
-  passwordChange = (text) => {
-    this.setState({password: text});
-  }
-
-  onPressButton = () => {
-    console.log("Button pressed");
-    // console.log(this.state);
-  }
-
-  render() {
-    console.log("Rendering");
-    return (
+  return (
+    <AppearanceProvider>
       <KeyboardAvoidingView style={styles.container} behavior={"padding"} contentContainerStyle={styles.container} enabled>
       {/* <View style={styles.container}> */}
         <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
@@ -39,7 +21,7 @@ export default class Login extends Component {
           autoCorrect={false}
           autoCapitalize={"none"}
           textContentType={"username"}
-          onChangeText={this.usernameChange}>
+          onChangeText={(text) => setUsername(text)}>
         </TextInput>
         <TextInput 
           style={styles.field} 
@@ -49,9 +31,9 @@ export default class Login extends Component {
           autoCapitalize={"none"} 
           textContentType={"password"}
           secureTextEntry={true}
-          onChangeText={this.passwordChange}>
+          onChangeText={(text) => setPassword(text)}>
         </TextInput>
-        <TouchableOpacity style={styles.button} onPress={this.onPressButton}>
+        <TouchableOpacity style={styles.button} onPress={() => console.log(username, password)}>
           <Text style={styles.buttonText}>Sign in</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.smallButton}>
@@ -62,8 +44,8 @@ export default class Login extends Component {
         </TouchableOpacity>
       {/* </View> */}
       </KeyboardAvoidingView>
-    )
-  }
+    </AppearanceProvider>
+  )
 };
 
 const styles = StyleSheet.create({
