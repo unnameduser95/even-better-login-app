@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TextInput, Text, StyleSheet, Dimensions, Image, TouchableOpacity, KeyboardAvoidingView, StatusBar, Keyboard, TouchableWithoutFeedback, View } from 'react-native';
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import { Ionicons } from '@expo/vector-icons';
+import { Linking } from 'expo';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -24,7 +25,9 @@ export default function Login(props) {
         <KeyboardAvoidingView style={[styles.container, themeContainer]} behavior={"padding"} enabled>
         {/* <View style={styles.container}> */}
           <StatusBar backgroundColor={themeStatusBar === "dark-content" ? "#ffffff" : "#000000"} barStyle={themeStatusBar} hidden={false} />
-          <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
+          <TouchableOpacity onPress={() => Linking.openURL("https://www.inspiredtaste.net/38940/spaghetti-with-meat-sauce-recipe/")}>
+            <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
+          </TouchableOpacity>
           <TextInput style={[styles.field, styles.fieldMargin, themeField]}
             placeholder={"Email"}
             placeholderTextColor={themePlaceholder}
