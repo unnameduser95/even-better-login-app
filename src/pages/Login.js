@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextInput, Text, StyleSheet, Dimensions, Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { TextInput, Text, StyleSheet, Dimensions, Image, TouchableOpacity, KeyboardAvoidingView, StatusBar } from 'react-native';
 import { Appearance, AppearanceProvider, useColorScheme } from 'react-native-appearance';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -11,6 +11,7 @@ export default function Login(props) {
   const themeContainer = colorScheme === "dark" ? styles.darkContainer : styles.lightContainer;
   const themeField = colorScheme === "dark" ? styles.darkField : styles.lightField;
   const themePlaceholder = colorScheme === "dark" ? "#c4c4c4" : "gray";
+  const themeStatusBar = colorScheme === "dark" ? "light-content" : "dark-content";
   
   const [username, setUsername] = useState("");  // useState hook returns variable and function
   const [password, setPassword] = useState("");
@@ -19,6 +20,7 @@ export default function Login(props) {
     <AppearanceProvider>
       <KeyboardAvoidingView style={[styles.container, themeContainer]} behavior={"padding"} contentContainerStyle={[styles.container, themeContainer]} enabled>
       {/* <View style={styles.container}> */}
+        <StatusBar backgroundColor={themeStatusBar === "dark-content" ? "#ffffff" : "#000000"} barStyle={themeStatusBar} hidden={false} />
         <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
         <TextInput style={[styles.field, themeField]}
           placeholder={"Username"}
