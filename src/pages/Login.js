@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     width: 275,
   },
   field: {
-    marginTop: 50,
+    marginTop: 35,
     paddingLeft: 10,
     width: 275,
     height: 40,
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     color: "#000000",
   },
   button: {
-    marginTop: 50,
+    marginTop: 35,
     marginBottom: 20,
     borderRadius: 5,
     height: 40,
