@@ -36,7 +36,7 @@ export default function Login(props) {
           </TextInput>
           <View style={[styles.passwordContainer, styles.fieldMargin]}>
             <TextInput 
-              style={[styles.field, themeField, {width: 250}]} 
+              style={[styles.field, themeField, {width: 235}]} 
               placeholder={"Password"} 
               placeholderTextColor={themePlaceholder}
               autoCorrect={false} 
@@ -46,7 +46,7 @@ export default function Login(props) {
               onChangeText={(text) => setPassword(text)}>
             </TextInput>
             <TouchableOpacity 
-              style={{justifyContent: "center", alignItems: "center", height: 40, width: 25}}
+              style={{justifyContent: "center", alignItems: "center", height: 40, width: 40}}
               onPress={() => setHidePassword(!hidePassword)}
             >
               <Ionicons name={hidePassword === true ? "md-eye" : "md-eye-off"} color="gray" size={20} />
