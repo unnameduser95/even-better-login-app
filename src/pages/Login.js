@@ -19,6 +19,7 @@ export default function Login(props) {
 
   const passwordInput = React.createRef();
   
+  const [loading, setLoadingStatus] = useState(false);
   const [username, setUsername] = useState("");  // useState hook returns variable and function
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
@@ -28,12 +29,6 @@ export default function Login(props) {
   const onSubmit = () => {
     console.log("Email:", username);
     console.log("Password:", password);
-
-    // if (username === "") {
-    //   setErrorMessageEmail("Email field cannot be empty.");
-    // } else {
-    //   setErrorMessageEmail("");
-    // }
 
     setErrorMessageEmail(username === "" ? "Email field cannot be blank." : "");
     setErrorMessagePassword(password === "" ? "Password field cannot be blank." : "");
