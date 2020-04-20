@@ -41,7 +41,7 @@ export default function Login(props) {
           </TextInput>
           <View style={[styles.passwordContainer, styles.fieldContainer]}>
             <TextInput 
-              style={[themeField, {width: 235}]}  // custom width for password field; must have space for show/hide button (width 40)
+              style={[styles.field, themeField, {width: 235}]}  // custom width for password field; must have space for show/hide button (width 40)
               placeholder={"Password"} 
               placeholderTextColor={themePlaceholder}
               autoCorrect={false} 
@@ -94,8 +94,10 @@ const styles = StyleSheet.create({
     marginTop: 35,
     borderBottomWidth: 2,
     borderBottomColor: "gray",
-    height: 40,
     width: 275
+  },
+  field: {
+    height: 40
   },
   passwordContainer: {
     flexDirection: "row",
