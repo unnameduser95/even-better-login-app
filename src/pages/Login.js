@@ -55,7 +55,8 @@ export default function Login(props) {
               autoCapitalize={"none"} 
               textContentType={"password"}
               secureTextEntry={hidePassword}
-              onChangeText={(text) => setPassword(text)}>
+              onChangeText={(text) => setPassword(text)}
+              onSubmitEditing={() => onSubmit(username, password)}>
             </TextInput>
             <TouchableOpacity 
               style={styles.showHideButton}
@@ -64,7 +65,7 @@ export default function Login(props) {
               <Ionicons name={hidePassword === true ? "md-eye" : "md-eye-off"} color="gray" size={22} />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.button} onPress={() => console.log(username, password)}>
+          <TouchableOpacity style={styles.button} onPress={() => onSubmit(username, password)}>
             <Text style={styles.buttonText}>Sign in</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.smallButton}>
@@ -79,6 +80,11 @@ export default function Login(props) {
     </AppearanceProvider>
   )
 };
+
+const onSubmit = (username, password) => {
+  console.log("Username:", username);
+  console.log("Password:", password);
+}
 
 const styles = StyleSheet.create({
   container: {
