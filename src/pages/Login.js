@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
   },
   fieldContainer: {
     width: 275,
-    height: 80
+    height: 70
   },
   inputContainer: {  // used with TextInput and View
     marginTop: 35,
