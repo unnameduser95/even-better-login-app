@@ -30,7 +30,7 @@ export default function Login(props) {
           <TouchableOpacity onPress={() => Linking.openURL("https://www.inspiredtaste.net/38940/spaghetti-with-meat-sauce-recipe/")}>
             <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
           </TouchableOpacity>
-          <TextInput style={[styles.field, styles.fieldMargin, themeField]}
+          <TextInput style={[styles.field, styles.fieldContainer, themeField]}
             placeholder={"Email"}
             placeholderTextColor={themePlaceholder}
             autoCorrect={false}
@@ -39,7 +39,7 @@ export default function Login(props) {
             onChangeText={(text) => setUsername(text)}
             keyboardType={"email-address"}>
           </TextInput>
-          <View style={[styles.passwordContainer, styles.fieldMargin]}>
+          <View style={[styles.passwordContainer, styles.fieldContainer]}>
             <TextInput 
               style={[styles.field, themeField, {width: 235}]} 
               placeholder={"Password"} 
@@ -90,19 +90,20 @@ const styles = StyleSheet.create({
     height: 100,
     width: 275,
   },
-  fieldMargin: {
+  fieldContainer: {
     marginTop: 35,
+    borderBottomWidth: 2,
+    borderBottomColor: "gray",
+    height: 40
   },
   passwordContainer: {
     flexDirection: "row",
     width: 275,
-  },
-  field: {
-    paddingLeft: 10,
-    width: 275,
-    height: 40,
     borderBottomWidth: 2,
     borderBottomColor: "gray"
+  },
+  field: {
+    width: 275,
   },
   darkField: {
     // backgroundColor: "#3b3b3b",
