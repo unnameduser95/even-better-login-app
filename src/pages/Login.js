@@ -22,6 +22,22 @@ export default function Login(props) {
   const [username, setUsername] = useState("");  // useState hook returns variable and function
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
+  const [errorMessageEmail, setErrorMessageEmail] = useState("");
+  const [errorMessagePassword, setErrorMessagePassword] = useState("");
+
+  const onSubmit = () => {
+    console.log("Email:", username);
+    console.log("Password:", password);
+
+    // if (username === "") {
+    //   setErrorMessageEmail("Email field cannot be empty.");
+    // } else {
+    //   setErrorMessageEmail("");
+    // }
+
+    setErrorMessageEmail(username === "" ? "Email field cannot be blank." : "");
+    setErrorMessagePassword(password === "" ? "Password field cannot be blank." : "");
+  }
 
   return (
     <AppearanceProvider>
@@ -32,38 +48,44 @@ export default function Login(props) {
           <TouchableOpacity onPress={() => Linking.openURL("https://www.inspiredtaste.net/38940/spaghetti-with-meat-sauce-recipe/")}>
             <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
           </TouchableOpacity>
-          <TextInput style={[styles.field, styles.fieldContainer, themeField]}
-            placeholder={"Email"}
-            placeholderTextColor={themePlaceholder}
-            autoCorrect={false}
-            autoCapitalize={"none"}
-            textContentType={"emailAddress"}
-            onChangeText={(text) => setUsername(text)}
-            onSubmitEditing={() => passwordInput.current.focus()}
-            keyboardType={"email-address"}
-            returnKeyType={"next"}
-            autoFocus={true}
-            blurOnSubmit={false}>
-          </TextInput>
-          <View style={[styles.passwordContainer, styles.fieldContainer]}>
-            <TextInput 
-              ref={passwordInput}
-              style={[styles.field, themeField, {width: 235}]}  // custom width for password field; must have space for show/hide button (width 40)
-              placeholder={"Password"} 
+          <View style={styles.fieldContainer}>
+            <TextInput style={[styles.field, styles.inputContainer, themeField]}
+              placeholder={"Email"}
               placeholderTextColor={themePlaceholder}
-              autoCorrect={false} 
-              autoCapitalize={"none"} 
-              textContentType={"password"}
-              secureTextEntry={hidePassword}
-              onChangeText={(text) => setPassword(text)}
-              onSubmitEditing={() => onSubmit(username, password)}>
+              autoCorrect={false}
+              autoCapitalize={"none"}
+              textContentType={"emailAddress"}
+              onChangeText={(text) => setUsername(text)}
+              onSubmitEditing={() => passwordInput.current.focus()}
+              keyboardType={"email-address"}
+              returnKeyType={"next"}
+              autoFocus={true}
+              blurOnSubmit={false}>
             </TextInput>
-            <TouchableOpacity 
-              style={styles.showHideButton}
-              onPress={() => setHidePassword(!hidePassword)}
-            >
-              <Ionicons name={hidePassword === true ? "md-eye" : "md-eye-off"} color="gray" size={22} />
-            </TouchableOpacity>
+            <Text style={styles.errorText}>{errorMessageEmail}</Text>
+          </View>
+          <View style={styles.fieldContainer}>
+            <View style={[styles.passwordContainer, styles.inputContainer]}>
+              <TextInput 
+                ref={passwordInput}
+                style={[styles.field, themeField, {width: 235}]}  // custom width for password field; must have space for show/hide button (width 40)
+                placeholder={"Password"} 
+                placeholderTextColor={themePlaceholder}
+                autoCorrect={false} 
+                autoCapitalize={"none"} 
+                textContentType={"password"}
+                secureTextEntry={hidePassword}
+                onChangeText={(text) => setPassword(text)}
+                onSubmitEditing={() => onSubmit(username, password)}>
+              </TextInput>
+              <TouchableOpacity 
+                style={styles.showHideButton}
+                onPress={() => setHidePassword(!hidePassword)}
+              >
+                <Ionicons name={hidePassword === true ? "md-eye" : "md-eye-off"} color="gray" size={22} />
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.errorText}>{errorMessagePassword}</Text>
           </View>
           <TouchableOpacity style={styles.button} onPress={() => onSubmit(username, password)}>
             <Text style={styles.buttonText}>Sign in</Text>
@@ -80,11 +102,6 @@ export default function Login(props) {
     </AppearanceProvider>
   )
 };
-
-const onSubmit = (username, password) => {
-  console.log("Username:", username);
-  console.log("Password:", password);
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -103,7 +120,11 @@ const styles = StyleSheet.create({
     height: 100,
     width: 275,
   },
-  fieldContainer: {  // container for fields; used with TextInput and View
+  fieldContainer: {
+    width: 275,
+    height: 80
+  },
+  inputContainer: {  // used with TextInput and View
     marginTop: 35,
     borderBottomWidth: 2,
     borderBottomColor: "gray",
@@ -128,6 +149,10 @@ const styles = StyleSheet.create({
   lightField: {
     // backgroundColor: "#d9d9d9",
     color: "#000000",
+  },
+  errorText: {
+    color: "red",
+    marginTop: 3,
   },
   button: {
     marginTop: 35,
