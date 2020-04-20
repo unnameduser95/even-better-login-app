@@ -16,11 +16,12 @@ export default function Login(props) {
   const themeField = colorScheme === "dark" ? styles.darkField : styles.lightField;
   const themePlaceholder = colorScheme === "dark" ? "#c4c4c4" : "gray";
   const themeStatusBar = colorScheme === "dark" ? "light-content" : "dark-content";
+
+  const passwordInput = React.createRef();
   
   const [username, setUsername] = useState("");  // useState hook returns variable and function
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
-  const [focusPasswordInput, setFocusPasswordInput] = useState(false);
 
   return (
     <AppearanceProvider>
@@ -38,13 +39,15 @@ export default function Login(props) {
             autoCapitalize={"none"}
             textContentType={"emailAddress"}
             onChangeText={(text) => setUsername(text)}
-            onSubmitEditing={() => setFocusPasswordInput(true)}
+            onSubmitEditing={() => passwordInput.current.focus()}
             keyboardType={"email-address"}
+            returnKeyType={"next"}
             autoFocus={true}
             blurOnSubmit={false}>
           </TextInput>
           <View style={[styles.passwordContainer, styles.fieldContainer]}>
             <TextInput 
+              ref={passwordInput}
               style={[styles.field, themeField, {width: 235}]}  // custom width for password field; must have space for show/hide button (width 40)
               placeholder={"Password"} 
               placeholderTextColor={themePlaceholder}
