@@ -41,6 +41,16 @@ export default function Login(props) {
     }
   }
 
+  const handleEmailChange = (email) => {
+    setUsername(email);
+    if (email !== "") { setErrorMessageEmail(""); }
+  };
+
+  const handlePasswordChange = (password) => {
+    setPassword(password);
+    if (password !== "") { setErrorMessagePassword(""); }
+  };
+
   let buttonDisplay = loading === true ? <ActivityIndicator size="small" color="#ffffff" /> : <Text style={styles.buttonText}>Sign in</Text>
 
   return (
@@ -59,7 +69,7 @@ export default function Login(props) {
               autoCorrect={false}
               autoCapitalize={"none"}
               textContentType={"emailAddress"}
-              onChangeText={(text) => setUsername(text)}
+              onChangeText={(text) => handleEmailChange(text)}
               onSubmitEditing={() => passwordInput.current.focus()}
               keyboardType={"email-address"}
               returnKeyType={"next"}
@@ -79,7 +89,7 @@ export default function Login(props) {
                 autoCapitalize={"none"} 
                 textContentType={"password"}
                 secureTextEntry={hidePassword}
-                onChangeText={(text) => setPassword(text)}
+                onChangeText={(text) => handlePasswordChange(text)}
                 onSubmitEditing={() => onSubmit(username, password)}>
               </TextInput>
               <TouchableOpacity 
