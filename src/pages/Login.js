@@ -51,7 +51,7 @@ export default function Login(props) {
               onChangeText={(text) => setPassword(text)}>
             </TextInput>
             <TouchableOpacity 
-              style={{justifyContent: "center", alignItems: "center", height: 40, width: 40}}
+              style={styles.showHideButton}
               onPress={() => setHidePassword(!hidePassword)}
             >
               <Ionicons name={hidePassword === true ? "md-eye" : "md-eye-off"} color="gray" size={22} />
@@ -101,6 +101,12 @@ const styles = StyleSheet.create({
     width: 275,
     borderBottomWidth: 2,
     borderBottomColor: "gray"
+  },
+  showHideButton: {
+    justifyContent: "center", 
+    alignItems: "center", 
+    height: 40, 
+    width: 40
   },
   field: {
     width: 275,
