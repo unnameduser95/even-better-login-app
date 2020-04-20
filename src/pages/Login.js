@@ -20,6 +20,7 @@ export default function Login(props) {
   const [username, setUsername] = useState("");  // useState hook returns variable and function
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
+  const [focusPasswordInput, setFocusPasswordInput] = useState(false);
 
   return (
     <AppearanceProvider>
@@ -37,7 +38,10 @@ export default function Login(props) {
             autoCapitalize={"none"}
             textContentType={"emailAddress"}
             onChangeText={(text) => setUsername(text)}
-            keyboardType={"email-address"}>
+            onSubmitEditing={() => setFocusPasswordInput(true)}
+            keyboardType={"email-address"}
+            autoFocus={true}
+            blurOnSubmit={false}>
           </TextInput>
           <View style={[styles.passwordContainer, styles.fieldContainer]}>
             <TextInput 
