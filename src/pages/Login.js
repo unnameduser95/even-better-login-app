@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextInput, Text, StyleSheet, Dimensions, Image, TouchableOpacity, KeyboardAvoidingView, StatusBar, Keyboard, TouchableWithoutFeedback, View } from 'react-native';
+import { TextInput, Text, StyleSheet, Dimensions, Image, TouchableOpacity, KeyboardAvoidingView, StatusBar, Keyboard, TouchableWithoutFeedback, View, ActivityIndicator } from 'react-native';
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import { Ionicons } from '@expo/vector-icons';
 import { Linking } from 'expo';
@@ -32,7 +32,16 @@ export default function Login(props) {
 
     setErrorMessageEmail(username === "" ? "Email field cannot be blank." : "");
     setErrorMessagePassword(password === "" ? "Password field cannot be blank." : "");
+
+    if (username === "" || password === "") {
+      console.log("Email or password is blank. Loading indicator won't be displayed.")
+      return 1;
+    } else {
+      setLoadingStatus(!loading);
+    }
   }
+
+  let buttonDisplay = loading === true ? <ActivityIndicator size="small" color="#ffffff" /> : <Text style={styles.buttonText}>Sign in</Text>
 
   return (
     <AppearanceProvider>
@@ -83,7 +92,8 @@ export default function Login(props) {
             <Text style={styles.errorText}>{errorMessagePassword}</Text>
           </View>
           <TouchableOpacity style={styles.button} onPress={() => onSubmit(username, password)}>
-            <Text style={styles.buttonText}>Sign in</Text>
+            {/* <Text style={styles.buttonText}>Sign in</Text> */}
+            {buttonDisplay}
           </TouchableOpacity>
           <TouchableOpacity style={styles.smallButton}>
             <Text style={styles.smallButtonText}>Forgot password?</Text>
