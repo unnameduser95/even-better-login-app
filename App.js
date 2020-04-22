@@ -20,6 +20,7 @@ export default function App() {
           headerMode={"none"}
         >
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Register" component={Register} />
         </Stack.Navigator>
       </NavigationContainer>
     </AppearanceProvider>

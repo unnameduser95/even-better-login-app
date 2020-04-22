@@ -12,7 +12,7 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 console.log("Device dimensions:", screenWidth, screenHeight);
 
-export default function Login(props) {
+export default function Login({ navigation }) {
   const colorScheme = useColorScheme();
   const themeContainer = colorScheme === "dark" ? styles.darkContainer : styles.lightContainer;
   const themeField = colorScheme === "dark" ? styles.darkField : styles.lightField;
@@ -131,7 +131,10 @@ export default function Login(props) {
           <TouchableOpacity style={styles.smallButton}>
             <Text style={styles.smallButtonText}>Forgot password?</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.smallButton]}>
+          <TouchableOpacity 
+            style={[styles.smallButton]}
+            onPress={() => navigation.navigate("Register")}  
+          >
             <Text style={styles.smallButtonText}>Don't have an account? Sign up</Text>
           </TouchableOpacity>
         {/* </View> */}
