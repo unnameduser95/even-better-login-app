@@ -9,6 +9,8 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
+src/components/Firebase.js
+src/components/API.js
 
 # macOS
 .DS_Store
