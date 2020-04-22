@@ -6,6 +6,8 @@ import { Linking } from 'expo';
 import * as ScreenOrientation from 'expo-screen-orientation';
 ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
 
+import signIn from '../components/Authenticate';
+
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 console.log("Device dimensions:", screenWidth, screenHeight);
@@ -23,35 +25,53 @@ export default function Login(props) {
   const [username, setUsername] = useState("");  // useState hook returns variable and function
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
-  const [errorMessageEmail, setErrorMessageEmail] = useState("");
-  const [errorMessagePassword, setErrorMessagePassword] = useState("");
+  const [messageEmail, setMessageEmail] = useState("");  // message displays below email field
+  const [messagePassword, setMessagePassword] = useState("");  // message displays below password field
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
-  const onSubmit = () => {
-    console.log("Email:", username);
-    console.log("Password:", password);
+  // let [buttonText, setButtonText] = useState("Sign in");
+  let buttonDisplay = loading === true ? <ActivityIndicator size="small" color="#ffffff" /> : <Text style={styles.buttonText}>{isSignedIn ? "Signed in!" : "Sign in"}</Text>
 
-    setErrorMessageEmail(username === "" ? "Email field cannot be blank." : "");
-    setErrorMessagePassword(password === "" ? "Password field cannot be blank." : "");
+  const onSubmit = async () => {
+    setMessageEmail(username === "" ? "Email field cannot be blank." : "");  // sets error message depending on blank field
+    setMessagePassword(password === "" ? "Password field cannot be blank." : "");
 
-    if (username === "" || password === "") {
-      console.log("Email or password is blank. Loading indicator won't be displayed.")
-      return 1;
-    } else {
-      setLoadingStatus(!loading);
+    setLoadingStatus(true);  // toggles loading
+
+    const response = await signIn(username, password)
+      .catch(error => {  // handle errors
+        switch (error.code) {
+          case "auth/wrong-password":
+            setMessagePassword("Invalid email or password.");  // nice
+            return null;
+          case "auth/invalid-email":
+            setMessagePassword("Invalid email or password.");
+            return null;
+          case "auth/user-not-found":
+            setMessagePassword("Invalid email or password.");
+            return null;
+          default:
+            setMessagePassword(error.message);
+            return null;
+        }
+      });
+
+    setLoadingStatus(false);
+
+    if (response) {
+      setIsSignedIn(true);
     }
   }
 
   const handleEmailChange = (email) => {
     setUsername(email);
-    if (email !== "") { setErrorMessageEmail(""); }
+    if (email !== "") { setMessageEmail(""); }
   };
 
   const handlePasswordChange = (password) => {
     setPassword(password);
-    if (password !== "") { setErrorMessagePassword(""); }
+    if (password !== "") { setMessagePassword(""); }
   };
-
-  let buttonDisplay = loading === true ? <ActivityIndicator size="small" color="#ffffff" /> : <Text style={styles.buttonText}>Sign in</Text>
 
   return (
     <AppearanceProvider>
@@ -76,7 +96,7 @@ export default function Login(props) {
               autoFocus={true}
               blurOnSubmit={false}>
             </TextInput>
-            <Text style={styles.errorText}>{errorMessageEmail}</Text>
+            <Text style={styles.errorText}>{messageEmail}</Text>
           </View>
           <View style={styles.fieldContainer}>
             <View style={[styles.passwordContainer, styles.inputContainer]}>
@@ -90,7 +110,7 @@ export default function Login(props) {
                 textContentType={"password"}
                 secureTextEntry={hidePassword}
                 onChangeText={(text) => handlePasswordChange(text)}
-                onSubmitEditing={() => onSubmit(username, password)}>
+                onSubmitEditing={() => {if (!isSignedIn && !loading) {onSubmit(username, password)};}}>
               </TextInput>
               <TouchableOpacity 
                 style={styles.showHideButton}
@@ -99,9 +119,12 @@ export default function Login(props) {
                 <Ionicons name={hidePassword === true ? "md-eye" : "md-eye-off"} color="gray" size={22} />
               </TouchableOpacity>
             </View>
-            <Text style={styles.errorText}>{errorMessagePassword}</Text>
+            <Text style={styles.errorText}>{messagePassword}</Text>
           </View>
-          <TouchableOpacity style={styles.button} onPress={() => onSubmit(username, password)}>
+          <TouchableOpacity 
+            style={styles.button} 
+            onPress={() => onSubmit(username, password)}
+            disabled={isSignedIn || loading}>
             {/* <Text style={styles.buttonText}>Sign in</Text> */}
             {buttonDisplay}
           </TouchableOpacity>
