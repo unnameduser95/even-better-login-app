@@ -2,23 +2,6 @@ import React, { useState } from 'react';
 import { TextInput, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-function Field(props) {  
-  // props: error (str), secure (bool), showHideButton (bool)
-
-  let [field, setField] = useState(<EmailField message={"Dummy error message"} />);
-
-  switch (props.field) {
-    case "email": setField(<EmailField message={"Dummy email error message"} />)
-    case "password": setField(<PasswordField message={"Dummy password error message"} />)
-  }
-
-  return (
-    <View>
-      {field}
-    </View>
-  );
-};
-
 const EmailField = (props) => {
   // console.log(props);
   return (
