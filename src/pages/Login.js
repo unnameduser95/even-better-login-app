@@ -16,7 +16,6 @@ console.log("Device dimensions:", screenWidth, screenHeight);
 export default function Login({ navigation }) {
   const colorScheme = useColorScheme();
   const themeContainer = colorScheme === "dark" ? styles.darkContainer : styles.lightContainer;
-  const themeText = colorScheme === "dark" ? styles.lightText : styles.darkText;
   const themeStatusBar = colorScheme === "dark" ? "light-content" : "dark-content";
   
   const [loading, setLoadingStatus] = useState(false);
