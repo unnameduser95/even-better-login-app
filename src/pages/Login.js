@@ -81,7 +81,6 @@ export default function Login({ navigation }) {
           <TouchableOpacity style={styles.logoContainer} onPress={() => Linking.openURL("https://www.inspiredtaste.net/38940/spaghetti-with-meat-sauce-recipe/")}>
             <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
           </TouchableOpacity>
-          <Text style={[styles.heading, themeText]}>Sign In</Text>
           <EmailField 
             message={messageEmail} 
             onChangeText={handleEmailChange}
