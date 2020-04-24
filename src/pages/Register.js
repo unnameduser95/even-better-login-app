@@ -3,6 +3,7 @@ import { TouchableOpacity, Text, Dimensions, StyleSheet, KeyboardAvoidingView, K
 import { AppearanceProvider } from 'react-native-appearance';
 
 import { NameField, EmailField, NewPasswordField } from '../components/Fields';
+import { SignUp } from '../components/Authenticate';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const screenWidth = Math.round(Dimensions.get('screen').width);
@@ -46,7 +47,29 @@ export default function Register({ navigation }) {
     setLastNameMessage(lastName === "" ? "Last name cannot be blank." : "");
     setEmailMessage(email === "" ? "Email cannot be blank." : "");
     setPasswordMessage(password === "" ? "Password cannot be blank." : "");
-    setConfirmPasswordMessage(password === confirmPassword ? "" : "Passwords do not match.")
+    setConfirmPasswordMessage(password === confirmPassword ? "" : "Passwords do not match.");
+
+    let response = await SignUp(email, password)
+      .catch(error => {
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            setEmailMessage("Email already in use. Please try a different one.");
+            return null;
+          case "auth/invalid-email":
+            setEmailMessage("Invalid email.");
+            return null;
+          case "auth/operation-not-allowed":
+            setEmailMessage("Email/password accounts are currently disabled.");
+            return null;
+          case "auth/weak-password":
+            setPasswordMessage("Password is too weak.");
+            return null;
+          default:
+            setPasswordMessage(error.message);
+            return null;
+        }
+      });
+    console.log(response);
   }
 
   return (
