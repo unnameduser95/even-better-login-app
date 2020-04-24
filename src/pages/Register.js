@@ -16,7 +16,7 @@ export default function Register(props) {
       <NameField placeholder={"Last Name"} />
       <EmailField />
       <NewPasswordField />
-      <NewPasswordField />
+      <NewPasswordField placeholder={"Confirm Password"} />
     </KeyboardAvoidingView>
   )
 }
