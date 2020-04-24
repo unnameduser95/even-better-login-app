@@ -6,10 +6,16 @@ import firebaseConfig from "./Firebase";
 
 firebase.initializeApp(firebaseConfig);
 
-const signIn = async (email, password) => {
+const SignIn = async (email, password) => {
   let response = await firebase.auth().signInWithEmailAndPassword(email, password);
 
   return response;
 };
+
+const SignUp = async (email, password) => {
+  let response = await firebase.auth().createUserWithEmailAndPassword(email, password);
+
+  return response;
+}
 
 export default signIn;

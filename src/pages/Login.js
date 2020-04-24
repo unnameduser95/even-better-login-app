@@ -6,7 +6,7 @@ import { Linking } from 'expo';
 import * as ScreenOrientation from 'expo-screen-orientation';
 ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
 
-import signIn from '../components/Authenticate';
+import SignIn from '../components/Authenticate';
 import { EmailField, PasswordField } from '../components/Fields';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -38,7 +38,7 @@ export default function Login({ navigation }) {
     if (username !== "" && password !== "") {
       setLoadingStatus(true);  // toggles loading
 
-      const response = await signIn(username, password)
+      const response = await SignIn(username, password)
         .catch(error => {  // handle errors
           switch (error.code) {
             case "auth/wrong-password":
