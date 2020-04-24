@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TouchableOpacity, Text, Dimensions, StyleSheet, KeyboardAvoidingView, Keyboard } from 'react-native';
 import { AppearanceProvider } from 'react-native-appearance';
 
@@ -9,13 +9,21 @@ const screenWidth = Math.round(Dimensions.get('screen').width);
 const screenHeight = Math.round(Dimensions.get('screen').height);
 
 export default function Register({ navigation }) {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   return (
-    // <Text>Register page</Text>
     <AppearanceProvider>
       <KeyboardAvoidingView style={styles.container} behavior={"padding"} enabled >
-        <NameField placeholder={"First Name"} />
+        <NameField placeholder={"First Name"} onSubmitEditing={() => Keyboard.dismiss()} />
         <NameField placeholder={"Last Name"} />
-        <EmailField />
+        <EmailField 
+          message={"Dummy message"}
+          onSubmitEditing={() => Keyboard.dismiss()}
+        />
         <NewPasswordField />
         <NewPasswordField placeholder={"Confirm Password"} />
         <TouchableOpacity style={styles.button}>
@@ -38,6 +46,7 @@ const styles = StyleSheet.create({
     width: screenWidth,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "white",
   },
   heading: {
     fontWeight: "bold",

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextInput, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { TextInput, StyleSheet, View, Text, TouchableOpacity, Keyboard } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const NameField = (props) => {
@@ -11,8 +11,8 @@ const NameField = (props) => {
         autoCorrect={false}
         autoCapitalize={"words"}
         textContentType={"name"}
-        onChangeText={props.onChangeText ? props.onChangeText : () => null}
-        onSubmitEditing={props.onSubmitEditing ? props.onSubmitEditing : () => null}
+        onChangeText={props.onChangeText}
+        onSubmitEditing={props.onSubmitEditing}
         keyboardType={"default"}
         returnKeyType={"none"}
         autoFocus={false}
@@ -27,16 +27,15 @@ const EmailField = (props) => {
   // console.log(props);
   return (
     <View style={styles.fieldContainer}>
-      <TextInput style={[styles.field, styles.inputContainer]}
+      <TextInput style={[styles.field, styles.inputContainer, props.style]}
         placeholder={props.placeholder ? props.placeholder : "Email"}
         placeholderTextColor={props.placeholderTextColor ? props.placeholderTextColor : "gray"}
         autoCorrect={false}
         autoCapitalize={"none"}
         textContentType={"emailAddress"}
-        onChangeText={props.onChangeText ? props.onChangeText : () => null}
-        onSubmitEditing={props.onSubmitEditing ? props.onSubmitEditing : () => null}
+        onChangeText={props.onChangeText}
+        onSubmitEditing={props.onSubmitEditing}
         keyboardType={"email-address"}
-        returnKeyType={"none"}
         autoFocus={props.autoFocus ? props.autoFocus : false}
         blurOnSubmit={false}>
       </TextInput>
@@ -59,9 +58,9 @@ const PasswordField = (props) => {
           autoCapitalize={"none"} 
           textContentType={"password"}
           secureTextEntry={hidePassword}
-          onChangeText={props.onChangeText ? props.onChangeText : () => null}
-          onSubmitEditing={props.onSubmitEditing ? props.onSubmitEditing : () => null}
-          focus={props.focus ? props.focus : false}>
+          onChangeText={props.onChangeText}
+          onSubmitEditing={props.onSubmitEditing}
+          focus={props.focus}>
         </TextInput>
         <TouchableOpacity 
           style={styles.showHideButton}
@@ -89,8 +88,8 @@ const NewPasswordField = (props) => {
           autoCapitalize={"none"} 
           textContentType={"newPassword"}
           secureTextEntry={hidePassword}
-          onChangeText={props.onChangeText ? props.onChangeText : () => null}
-          onSubmitEditing={props.onSubmitEditing ? props.onSubmitEditing : () => null}
+          onChangeText={props.onChangeText}
+          onSubmitEditing={props.onSubmitEditing}
           focus={props.focus ? props.focus : false}>
         </TextInput>
         <TouchableOpacity 
