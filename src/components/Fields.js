@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
     height: 70
   },
   inputContainer: {  // used with TextInput and View
-    marginTop: 35,
     borderBottomWidth: 2,
     borderBottomColor: "gray",
     width: 275

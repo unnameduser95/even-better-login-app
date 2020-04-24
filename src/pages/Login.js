@@ -78,7 +78,7 @@ export default function Login({ navigation }) {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <KeyboardAvoidingView style={[styles.container, themeContainer]} behavior={"padding"} enabled>
           <StatusBar backgroundColor={themeStatusBar === "dark-content" ? "#ffffff" : "#000000"} barStyle={themeStatusBar} hidden={false} />
-          <TouchableOpacity onPress={() => Linking.openURL("https://www.inspiredtaste.net/38940/spaghetti-with-meat-sauce-recipe/")}>
+          <TouchableOpacity style={styles.logoContainer} onPress={() => Linking.openURL("https://www.inspiredtaste.net/38940/spaghetti-with-meat-sauce-recipe/")}>
             <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
           </TouchableOpacity>
           <EmailField 
@@ -90,46 +90,6 @@ export default function Login({ navigation }) {
             onChangeText={handlePasswordChange}  
             onSubmitEditing={() => {if (!isSignedIn && !loading) {onSubmit(username, password)}}}
           />
-          {/* <Field message={""} field={"email"} /> */}
-          {/* <View style={styles.fieldContainer}>
-            <TextInput style={[styles.field, styles.inputContainer, themeField]}
-              placeholder={"Email"}
-              placeholderTextColor={themePlaceholder}
-              autoCorrect={false}
-              autoCapitalize={"none"}
-              textContentType={"emailAddress"}
-              onChangeText={(text) => handleEmailChange(text)}
-              onSubmitEditing={() => passwordInput.current.focus()}
-              keyboardType={"email-address"}
-              returnKeyType={"next"}
-              autoFocus={true}
-              blurOnSubmit={false}>
-            </TextInput>
-            <Text style={styles.errorText}>{messageEmail}</Text>
-          </View>
-          <View style={styles.fieldContainer}>
-            <View style={[styles.passwordContainer, styles.inputContainer]}>
-              <TextInput 
-                ref={passwordInput}
-                style={[styles.field, themeField, {width: 235}]}  // custom width for password field; must have space for show/hide button (width 40)
-                placeholder={"Password"} 
-                placeholderTextColor={themePlaceholder}
-                autoCorrect={false} 
-                autoCapitalize={"none"} 
-                textContentType={"password"}
-                secureTextEntry={hidePassword}
-                onChangeText={(text) => handlePasswordChange(text)}
-                onSubmitEditing={() => {if (!isSignedIn && !loading) {onSubmit(username, password)};}}>
-              </TextInput>
-              <TouchableOpacity 
-                style={styles.showHideButton}
-                onPress={() => setHidePassword(!hidePassword)}
-              >
-                <Ionicons name={hidePassword === true ? "md-eye" : "md-eye-off"} color="gray" size={22} />
-              </TouchableOpacity>
-            </View>
-            <Text style={styles.errorText}>{messagePassword}</Text>
-          </View> */}
           <TouchableOpacity 
             style={styles.button} 
             onPress={() => onSubmit(username, password)}
@@ -168,6 +128,9 @@ const styles = StyleSheet.create({
   logo: {
     height: 100,
     width: 275,
+  },
+  logoContainer: {
+    marginBottom: 35,
   },
   fieldContainer: {
     width: 275,
