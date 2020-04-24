@@ -7,7 +7,7 @@ import { NameField, EmailField, NewPasswordField } from '../components/Fields';
 const screenWidth = Math.round(Dimensions.get('screen').width);
 const screenHeight = Math.round(Dimensions.get('screen').height);
 
-export default function Register(props) {
+export default function Register({ navigation }) {
   return (
     // <Text>Register page</Text>
 
@@ -21,7 +21,10 @@ export default function Register(props) {
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.smallButton}>
+      <TouchableOpacity 
+        style={styles.smallButton}
+        onPress={() => navigation.navigate("Login")}  
+      >
         <Text style={styles.smallButtonText}>Already have an account? Sign in</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
