@@ -42,7 +42,11 @@ export default function Register({ navigation }) {
   };
 
   const onSubmit = async () => {
-    return;
+    setFirstNameMessage(firstName === "" ? "First name cannot be blank." : "");
+    setLastNameMessage(lastName === "" ? "Last name cannot be blank." : "");
+    setEmailMessage(email === "" ? "Email cannot be blank." : "");
+    setPasswordMessage(password === "" ? "Password cannot be blank." : "");
+    setConfirmPasswordMessage(password === confirmPassword ? "" : "Passwords do not match.")
   }
 
   return (
@@ -72,7 +76,10 @@ export default function Register({ navigation }) {
           message={confirmPasswordMessage}
           onChangeText={handleConfirmPasswordChange}  
         />
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={onSubmit}  
+        >
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
         <TouchableOpacity 
