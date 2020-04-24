@@ -19,7 +19,7 @@ const EmailField = (props) => {
         autoFocus={true}
         blurOnSubmit={false}>
       </TextInput>
-      <Text style={styles.errorText}>{props.message}</Text>
+      <Text style={styles.errorText}>{props.message ? props.message : ""}</Text>
     </View>
   )
 }
@@ -48,7 +48,7 @@ const PasswordField = (props) => {
           <Ionicons name={hidePassword === true ? "md-eye" : "md-eye-off"} color="gray" size={22} />
         </TouchableOpacity>
       </View>
-      <Text style={styles.errorText}>{props.message}</Text>
+      <Text style={styles.errorText}>{props.message ? props.message : ""}</Text>
     </View>
   )
 }
