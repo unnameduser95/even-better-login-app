@@ -15,6 +15,26 @@ export default function Register({ navigation }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const handleFirstNameChange = (name) => {
+    setFirstName(name);
+  };
+
+  const handleLastNameChange = (name) => {
+    setLastName(name);
+  };
+
+  const handleEmailChange = (email) => {
+    setEmail(email);
+  };
+
+  const handlePasswordChange = (password) => {
+    setPassword(password)
+  };
+
+  const handleConfirmPasswordChange = (password) => {
+    setConfirmPassword(password);
+  };
+
   return (
     <AppearanceProvider>
       <KeyboardAvoidingView style={styles.container} behavior={"padding"} enabled >
