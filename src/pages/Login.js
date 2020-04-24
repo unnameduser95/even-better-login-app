@@ -7,6 +7,7 @@ import * as ScreenOrientation from 'expo-screen-orientation';
 ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
 
 import signIn from '../components/Authenticate';
+import { EmailField, PasswordField } from '../components/Fields';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -15,16 +16,13 @@ console.log("Device dimensions:", screenWidth, screenHeight);
 export default function Login({ navigation }) {
   const colorScheme = useColorScheme();
   const themeContainer = colorScheme === "dark" ? styles.darkContainer : styles.lightContainer;
-  const themeField = colorScheme === "dark" ? styles.darkField : styles.lightField;
-  const themePlaceholder = colorScheme === "dark" ? "#c4c4c4" : "gray";
+  // const themeField = colorScheme === "dark" ? styles.darkField : styles.lightField;
+  // const themePlaceholder = colorScheme === "dark" ? "#c4c4c4" : "gray";
   const themeStatusBar = colorScheme === "dark" ? "light-content" : "dark-content";
-
-  const passwordInput = React.createRef();
   
   const [loading, setLoadingStatus] = useState(false);
   const [username, setUsername] = useState("");  // useState hook returns variable and function
   const [password, setPassword] = useState("");
-  const [hidePassword, setHidePassword] = useState(true);
   const [messageEmail, setMessageEmail] = useState("");  // message displays below email field
   const [messagePassword, setMessagePassword] = useState("");  // message displays below password field
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -36,30 +34,32 @@ export default function Login({ navigation }) {
     setMessageEmail(username === "" ? "Email field cannot be blank." : "");  // sets error message depending on blank field
     setMessagePassword(password === "" ? "Password field cannot be blank." : "");
 
-    setLoadingStatus(true);  // toggles loading
+    if (messagePassword === "" && messageEmail === "") {
+      setLoadingStatus(true);  // toggles loading
 
-    const response = await signIn(username, password)
-      .catch(error => {  // handle errors
-        switch (error.code) {
-          case "auth/wrong-password":
-            setMessagePassword("Invalid email or password.");  // nice
-            return null;
-          case "auth/invalid-email":
-            setMessagePassword("Invalid email or password.");
-            return null;
-          case "auth/user-not-found":
-            setMessagePassword("Invalid email or password.");
-            return null;
-          default:
-            setMessagePassword(error.message);
-            return null;
-        }
-      });
+      const response = await signIn(username, password)
+        .catch(error => {  // handle errors
+          switch (error.code) {
+            case "auth/wrong-password":
+              setMessagePassword("Invalid email or password.");  // nice
+              return null;
+            case "auth/invalid-email":
+              setMessagePassword("Invalid email or password.");
+              return null;
+            case "auth/user-not-found":
+              setMessagePassword("Invalid email or password.");
+              return null;
+            default:
+              setMessagePassword(error.message);
+              return null;
+          }
+        });
 
-    setLoadingStatus(false);
+      setLoadingStatus(false);
 
-    if (response) {
-      setIsSignedIn(true);
+      if (response) {
+        setIsSignedIn(true);
+      }
     }
   }
 
@@ -77,12 +77,21 @@ export default function Login({ navigation }) {
     <AppearanceProvider>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <KeyboardAvoidingView style={[styles.container, themeContainer]} behavior={"padding"} enabled>
-        {/* <View style={styles.container}> */}
           <StatusBar backgroundColor={themeStatusBar === "dark-content" ? "#ffffff" : "#000000"} barStyle={themeStatusBar} hidden={false} />
           <TouchableOpacity onPress={() => Linking.openURL("https://www.inspiredtaste.net/38940/spaghetti-with-meat-sauce-recipe/")}>
             <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
           </TouchableOpacity>
-          <View style={styles.fieldContainer}>
+          <EmailField 
+            message={messageEmail} 
+            onChangeText={handleEmailChange}
+          />
+          <PasswordField 
+            message={messagePassword} 
+            onChangeText={handlePasswordChange}  
+            onSubmitEditing={() => {if (!isSignedIn && !loading) {onSubmit(username, password)}}}
+          />
+          {/* <Field message={""} field={"email"} /> */}
+          {/* <View style={styles.fieldContainer}>
             <TextInput style={[styles.field, styles.inputContainer, themeField]}
               placeholder={"Email"}
               placeholderTextColor={themePlaceholder}
@@ -120,12 +129,11 @@ export default function Login({ navigation }) {
               </TouchableOpacity>
             </View>
             <Text style={styles.errorText}>{messagePassword}</Text>
-          </View>
+          </View> */}
           <TouchableOpacity 
             style={styles.button} 
             onPress={() => onSubmit(username, password)}
             disabled={isSignedIn || loading}>
-            {/* <Text style={styles.buttonText}>Sign in</Text> */}
             {buttonDisplay}
           </TouchableOpacity>
           <TouchableOpacity style={styles.smallButton}>
