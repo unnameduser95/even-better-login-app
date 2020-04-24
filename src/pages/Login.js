@@ -16,16 +16,16 @@ console.log("Device dimensions:", screenWidth, screenHeight);
 export default function Login({ navigation }) {
   const colorScheme = useColorScheme();
   const themeContainer = colorScheme === "dark" ? styles.darkContainer : styles.lightContainer;
-  // const themeField = colorScheme === "dark" ? styles.darkField : styles.lightField;
-  // const themePlaceholder = colorScheme === "dark" ? "#c4c4c4" : "gray";
   const themeStatusBar = colorScheme === "dark" ? "light-content" : "dark-content";
   
   const [loading, setLoadingStatus] = useState(false);
+
   const [username, setUsername] = useState("");  // useState hook returns variable and function
   const [password, setPassword] = useState("");
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
   const [messageEmail, setMessageEmail] = useState("");  // message displays below email field
   const [messagePassword, setMessagePassword] = useState("");  // message displays below password field
-  const [isSignedIn, setIsSignedIn] = useState(false);
 
   // let [buttonText, setButtonText] = useState("Sign in");
   let buttonDisplay = loading === true ? <ActivityIndicator size="small" color="#ffffff" /> : <Text style={styles.buttonText}>{isSignedIn ? "Signed in!" : "Sign in"}</Text>

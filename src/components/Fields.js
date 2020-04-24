@@ -29,8 +29,8 @@ const EmailField = (props) => {
         autoCorrect={false}
         autoCapitalize={"none"}
         textContentType={"emailAddress"}
-        onChangeText={props.onChangeText}
-        onSubmitEditing={props.onSubmitEditing}
+        onChangeText={props.onChangeText ? props.onChangeText : () => null}
+        onSubmitEditing={props.onSubmitEditing ? props.onSubmitEditing : () => null}
         keyboardType={"email-address"}
         returnKeyType={"next"}
         autoFocus={true}
@@ -48,16 +48,15 @@ const PasswordField = (props) => {
     <View style={styles.fieldContainer}>
       <View style={[styles.passwordContainer, styles.inputContainer]}>
         <TextInput 
-          // ref={passwordInput}
           style={[styles.field, {width: 235}]}  // custom width for password field; must have space for show/hide button (width 40)
           placeholder={"Password"} 
-          // placeholderTextColor={props.placeholderTextColor ? props.placeholderTextColor : "gray"}
           autoCorrect={false}
           autoCapitalize={"none"} 
           textContentType={"password"}
           secureTextEntry={hidePassword}
-          onChangeText={props.onChangeText}
-          onSubmitEditing={props.onSubmitEditing}>
+          onChangeText={props.onChangeText ? props.onChangeText : () => null}
+          onSubmitEditing={props.onSubmitEditing ? props.onSubmitEditing : () => null}
+          focus={props.focus ? props.focus : false}>
         </TextInput>
         <TouchableOpacity 
           style={styles.showHideButton}
