@@ -27,6 +27,8 @@ export default function Login({ navigation }) {
   const [messageEmail, setMessageEmail] = useState("");  // message displays below email field
   const [messagePassword, setMessagePassword] = useState("");  // message displays below password field
 
+  const [field, setField] = useState(false);
+
   let buttonDisplay = loading === true ? <ActivityIndicator size="small" color="#ffffff" /> : <Text style={styles.buttonText}>{isSignedIn ? "Signed in!" : "Sign in"}</Text>
 
   const onSubmit = async () => {
@@ -83,6 +85,10 @@ export default function Login({ navigation }) {
           <EmailField 
             message={messageEmail} 
             onChangeText={handleEmailChange}
+            onSubmitEditing={() => {
+              Keyboard.dismiss();
+              setField(true);
+            }}
           />
           <PasswordField 
             message={messagePassword} 
