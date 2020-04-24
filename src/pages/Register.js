@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, Text, Dimensions, StyleSheet, KeyboardAvoidingView, Keyboard } from 'react-native';
+import { TouchableOpacity, Text, Dimensions, StyleSheet, KeyboardAvoidingView, Keyboard, ActivityIndicator } from 'react-native';
 import { AppearanceProvider } from 'react-native-appearance';
 
 import { NameField, EmailField, NewPasswordField } from '../components/Fields';
@@ -21,6 +21,9 @@ export default function Register({ navigation }) {
   const [emailMessage, setEmailMessage] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
   const [confirmPasswordMessage, setConfirmPasswordMessage] = useState("");
+
+  const [buttonDisplay, setButtonDisplay] = useState(<Text>Sign Up</Text>);
+  const [signedUp, isSignedUp] = useState(false);
 
   const handleFirstNameChange = (name) => {
     setFirstName(name);
@@ -49,27 +52,28 @@ export default function Register({ navigation }) {
     setPasswordMessage(password === "" ? "Password cannot be blank." : "");
     setConfirmPasswordMessage(password === confirmPassword ? "" : "Passwords do not match.");
 
-    let response = await SignUp(email, password)
-      .catch(error => {
-        switch (error.code) {
-          case "auth/email-already-in-use":
-            setEmailMessage("Email already in use. Please try a different one.");
-            return null;
-          case "auth/invalid-email":
-            setEmailMessage("Invalid email.");
-            return null;
-          case "auth/operation-not-allowed":
-            setEmailMessage("Email/password accounts are currently disabled.");
-            return null;
-          case "auth/weak-password":
-            setPasswordMessage("Password is too weak.");
-            return null;
-          default:
-            setPasswordMessage(error.message);
-            return null;
-        }
-      });
-    console.log(response);
+    if (firstName !== "" && lastName !== "" && email !== "" && password !== "" && confirmPassword === password) {
+      let response = await SignUp(email, password)
+        .catch(error => {
+          switch (error.code) {
+            case "auth/email-already-in-use":
+              setEmailMessage("Email already in use. Please try a different one.");
+              return null;
+            case "auth/invalid-email":
+              setEmailMessage("Invalid email.");
+              return null;
+            case "auth/operation-not-allowed":
+              setEmailMessage("Email/password accounts are currently disabled.");
+              return null;
+            case "auth/weak-password":
+              setPasswordMessage("Password is too weak.");
+              return null;
+            default:
+              setPasswordMessage(error.message);
+              return null;
+          }
+        });
+    }
   }
 
   return (
