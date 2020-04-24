@@ -38,14 +38,26 @@ export default function Register({ navigation }) {
   return (
     <AppearanceProvider>
       <KeyboardAvoidingView style={styles.container} behavior={"padding"} enabled >
-        <NameField placeholder={"First Name"} onSubmitEditing={() => Keyboard.dismiss()} />
-        <NameField placeholder={"Last Name"} />
+        <NameField 
+          placeholder={"First Name"} 
+          onChangeText={handleFirstNameChange}
+          onSubmitEditing={() => Keyboard.dismiss()} />
+        <NameField 
+          placeholder={"Last Name"} 
+          onChangeText={handleLastNameChange}  
+        />
         <EmailField 
           message={"Dummy message"}
+          onChangeText={handleEmailChange}
           onSubmitEditing={() => Keyboard.dismiss()}
         />
-        <NewPasswordField />
-        <NewPasswordField placeholder={"Confirm Password"} />
+        <NewPasswordField 
+          onChangeText={handlePasswordChange}
+        />
+        <NewPasswordField 
+          placeholder={"Confirm Password"}
+          onChangeText={handleConfirmPasswordChange}  
+        />
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
