@@ -34,7 +34,7 @@ export default function Login({ navigation }) {
     setMessageEmail(username === "" ? "Email field cannot be blank." : "");  // sets error message depending on blank field
     setMessagePassword(password === "" ? "Password field cannot be blank." : "");
 
-    if (messagePassword === "" && messageEmail === "") {
+    if (username !== "" && password !== "") {
       setLoadingStatus(true);  // toggles loading
 
       const response = await signIn(username, password)
