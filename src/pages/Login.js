@@ -16,6 +16,7 @@ console.log("Device dimensions:", screenWidth, screenHeight);
 export default function Login({ navigation }) {
   const colorScheme = useColorScheme();
   const themeContainer = colorScheme === "dark" ? styles.darkContainer : styles.lightContainer;
+  const themeText = colorScheme === "dark" ? styles.lightText : styles.darkText;
   const themeStatusBar = colorScheme === "dark" ? "light-content" : "dark-content";
   
   const [loading, setLoadingStatus] = useState(false);
@@ -27,7 +28,6 @@ export default function Login({ navigation }) {
   const [messageEmail, setMessageEmail] = useState("");  // message displays below email field
   const [messagePassword, setMessagePassword] = useState("");  // message displays below password field
 
-  // let [buttonText, setButtonText] = useState("Sign in");
   let buttonDisplay = loading === true ? <ActivityIndicator size="small" color="#ffffff" /> : <Text style={styles.buttonText}>{isSignedIn ? "Signed in!" : "Sign in"}</Text>
 
   const onSubmit = async () => {
@@ -81,6 +81,7 @@ export default function Login({ navigation }) {
           <TouchableOpacity style={styles.logoContainer} onPress={() => Linking.openURL("https://www.inspiredtaste.net/38940/spaghetti-with-meat-sauce-recipe/")}>
             <Image style={styles.logo} source={require('../../assets/logo.jpg')}/>
           </TouchableOpacity>
+          <Text style={[styles.heading, themeText]}>Sign In</Text>
           <EmailField 
             message={messageEmail} 
             onChangeText={handleEmailChange}
@@ -132,6 +133,11 @@ const styles = StyleSheet.create({
   logoContainer: {
     marginBottom: 35,
   },
+  heading: {
+    fontWeight: "bold",
+    fontSize: 25,
+    marginBottom: 20
+  },
   fieldContainer: {
     width: 275,
     height: 70
@@ -161,6 +167,12 @@ const styles = StyleSheet.create({
   lightField: {
     // backgroundColor: "#d9d9d9",
     color: "#000000",
+  },
+  darkText: {
+    color: "black"
+  },
+  lightText: {
+    color: "white"
   },
   errorText: {
     color: "red",
