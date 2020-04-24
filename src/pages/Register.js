@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, Text, Dimensions, StyleSheet, KeyboardAvoidingView, Keyboard, ActivityIndicator } from 'react-native';
+import { Image, TouchableOpacity, Text, Dimensions, StyleSheet, KeyboardAvoidingView, Keyboard, ActivityIndicator } from 'react-native';
 import { AppearanceProvider } from 'react-native-appearance';
+import { Linking } from 'expo';
 
 import { NameField, EmailField, NewPasswordField } from '../components/Fields';
 import { SignUp } from '../components/Authenticate';
@@ -79,6 +80,9 @@ export default function Register({ navigation }) {
   return (
     <AppearanceProvider>
       <KeyboardAvoidingView style={styles.container} behavior={"padding"} enabled >
+        <TouchableOpacity style={styles.logoContainer} onPress={() => Linking.openURL("https://www.inspiredtaste.net/38940/spaghetti-with-meat-sauce-recipe/")}>
+          <Image style={styles.logo} source={require('../../assets/logo.jpg')} />
+        </TouchableOpacity>
         <NameField 
           placeholder={"First Name"} 
           onChangeText={handleFirstNameChange}
@@ -127,6 +131,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "white",
+  },
+  logo: {
+    height: 100,
+    width: 275,
+  },
+  logoContainer: {
+    marginBottom: 35,
   },
   heading: {
     fontWeight: "bold",
