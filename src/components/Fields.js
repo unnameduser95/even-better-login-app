@@ -6,8 +6,8 @@ const NameField = (props) => {
   return (
     <View style={styles.fieldContainer}>
       <TextInput style={[styles.field, styles.inputContainer]}
-        placeholder={"Name"}
-        // placeholderTextColor={props.placeholderTextColor ? props.placeholderTextColor : "gray"}
+        placeholder={props.placeholder ? props.placeholder : "Name"}
+        placeholderTextColor={props.placeholderTextColor ? props.placeholderTextColor : "gray"}
         autoCorrect={false}
         autoCapitalize={"words"}
         textContentType={"name"}
@@ -29,7 +29,7 @@ const EmailField = (props) => {
     <View style={styles.fieldContainer}>
       <TextInput style={[styles.field, styles.inputContainer]}
         placeholder={"Email"}
-        // placeholderTextColor={props.placeholderTextColor ? props.placeholderTextColor : "gray"}
+        placeholderTextColor={props.placeholderTextColor ? props.placeholderTextColor : "gray"}
         autoCorrect={false}
         autoCapitalize={"none"}
         textContentType={"emailAddress"}
@@ -54,6 +54,7 @@ const PasswordField = (props) => {
         <TextInput 
           style={[styles.field, {width: 235}]}  // custom width for password field; must have space for show/hide button (width 40)
           placeholder={"Password"} 
+          placeholderTextColor={props.placeholderTextColor ? props.placeholderTextColor : "gray"}
           autoCorrect={false}
           autoCapitalize={"none"} 
           textContentType={"password"}
@@ -83,6 +84,7 @@ const NewPasswordField = (props) => {
         <TextInput 
           style={[styles.field, {width: 235}]}  // custom width for password field; must have space for show/hide button (width 40)
           placeholder={"Password"} 
+          placeholderTextColor={props.placeholderTextColor ? props.placeholderTextColor : "gray"}
           autoCorrect={false}
           autoCapitalize={"none"} 
           textContentType={"newPassword"}
