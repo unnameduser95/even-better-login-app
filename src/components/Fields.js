@@ -131,4 +131,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { EmailField, PasswordField };
+export { NameField, EmailField, PasswordField, NewPasswordField };
