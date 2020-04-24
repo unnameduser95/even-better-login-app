@@ -18,4 +18,4 @@ const SignUp = async (email, password) => {
   return response;
 }
 
-export default signIn;
+export default { SignIn, SignUp };

@@ -6,7 +6,7 @@ import { Linking } from 'expo';
 import * as ScreenOrientation from 'expo-screen-orientation';
 ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
 
-import SignIn from '../components/Authenticate';
+import { SignIn } from '../components/Authenticate';
 import { EmailField, PasswordField } from '../components/Fields';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
