@@ -15,6 +15,12 @@ export default function Register({ navigation }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const [firstNameMessage, setFirstNameMessage] = useState("");
+  const [lastNameMessage, setLastNameMessage] = useState("");
+  const [emailMessage, setEmailMessage] = useState("");
+  const [passwordMessage, setPasswordMessage] = useState("");
+  const [confirmPasswordMessage, setConfirmPasswordMessage] = useState("");
+
   const handleFirstNameChange = (name) => {
     setFirstName(name);
   };
@@ -35,27 +41,35 @@ export default function Register({ navigation }) {
     setConfirmPassword(password);
   };
 
+  const onSubmit = async () => {
+    return;
+  }
+
   return (
     <AppearanceProvider>
       <KeyboardAvoidingView style={styles.container} behavior={"padding"} enabled >
         <NameField 
           placeholder={"First Name"} 
           onChangeText={handleFirstNameChange}
+          message={firstNameMessage}
           onSubmitEditing={() => Keyboard.dismiss()} />
         <NameField 
           placeholder={"Last Name"} 
+          message={lastNameMessage}
           onChangeText={handleLastNameChange}  
         />
         <EmailField 
-          message={"Dummy message"}
+          message={emailMessage}
           onChangeText={handleEmailChange}
           onSubmitEditing={() => Keyboard.dismiss()}
         />
         <NewPasswordField 
+          message={passwordMessage}
           onChangeText={handlePasswordChange}
         />
         <NewPasswordField 
           placeholder={"Confirm Password"}
+          message={confirmPasswordMessage}
           onChangeText={handleConfirmPasswordChange}  
         />
         <TouchableOpacity style={styles.button}>
