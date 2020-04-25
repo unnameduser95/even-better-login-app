@@ -56,10 +56,10 @@ export default function Register({ navigation }) {
     setFirstNameMessage(firstName === "" ? "First name cannot be blank." : "");
     setLastNameMessage(lastName === "" ? "Last name cannot be blank." : "");
     setEmailMessage(email === "" ? "Email cannot be blank." : "");
-    setPasswordMessage(password === "" ? "Password cannot be blank." : "");
+    setPasswordMessage(password.length < 8 ? "Password must be at least 8 characters long." : "");
     setConfirmPasswordMessage(password === confirmPassword ? "" : "Passwords do not match.");
 
-    if (firstName !== "" && lastName !== "" && email !== "" && password !== "" && confirmPassword === password) {
+    if (firstName !== "" && lastName !== "" && email !== "" && password !== "" && confirmPassword === password && password.length >= 8) {
       setLoadingStatus(true);
 
       let response = await SignUp(email, password)
@@ -113,6 +113,7 @@ export default function Register({ navigation }) {
           onSubmitEditing={() => Keyboard.dismiss()}
         />
         <NewPasswordField 
+          placeholder={"Password (8 characters minimum)"}
           message={passwordMessage}
           onChangeText={handlePasswordChange}
         />
