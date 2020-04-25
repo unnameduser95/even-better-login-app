@@ -23,8 +23,14 @@ export default function Register({ navigation }) {
   const [passwordMessage, setPasswordMessage] = useState("");
   const [confirmPasswordMessage, setConfirmPasswordMessage] = useState("");
 
-  const [buttonDisplay, setButtonDisplay] = useState(<Text>Sign Up</Text>);
-  const [signedUp, isSignedUp] = useState(false);
+  const [isSignedUp, setIsSignedUp] = useState(false);
+  const [loading, setLoadingStatus] = useState(false);
+
+  let buttonDisplay = loading === true ? 
+    <ActivityIndicator size="small" color="#ffffff" /> :
+    <Text style={styles.buttonText}>
+      {isSignedUp ? "Signed up!" : "Sign up"}
+    </Text>
 
   const handleFirstNameChange = (name) => {
     setFirstName(name);
@@ -54,6 +60,8 @@ export default function Register({ navigation }) {
     setConfirmPasswordMessage(password === confirmPassword ? "" : "Passwords do not match.");
 
     if (firstName !== "" && lastName !== "" && email !== "" && password !== "" && confirmPassword === password) {
+      setLoadingStatus(true);
+
       let response = await SignUp(email, password)
         .catch(error => {
           switch (error.code) {
@@ -74,6 +82,12 @@ export default function Register({ navigation }) {
               return null;
           }
         });
+
+      setLoadingStatus(false);
+      
+      if (response) {
+        setIsSignedUp(true);
+      }
     }
   }
 
@@ -111,7 +125,7 @@ export default function Register({ navigation }) {
           style={styles.button}
           onPress={onSubmit}  
         >
-          <Text style={styles.buttonText}>Sign Up</Text>
+          {buttonDisplay}
         </TouchableOpacity>
         <TouchableOpacity 
           style={styles.smallButton}
