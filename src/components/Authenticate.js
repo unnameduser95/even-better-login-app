@@ -18,4 +18,14 @@ const SignUp = async (email, password) => {
   return response;
 };
 
-export { SignIn, SignUp }
+const UpdateProfile = async (displayName) => {
+  const user = firebase.auth().currentUser;
+
+  await user.updateProfile({
+    displayName,
+  })
+
+  return;
+}
+
+export { SignIn, SignUp, UpdateProfile };

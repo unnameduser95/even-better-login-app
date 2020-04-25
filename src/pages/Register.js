@@ -4,7 +4,7 @@ import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import { Linking } from 'expo';
 
 import { NameField, EmailField, NewPasswordField } from '../components/Fields';
-import { SignUp } from '../components/Authenticate';
+import { SignUp, UpdateProfile } from '../components/Authenticate';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const screenWidth = Math.round(Dimensions.get('screen').width);
@@ -85,12 +85,16 @@ export default function Register({ navigation }) {
               return null;
           }
         });
-
-      setLoadingStatus(false);
       
       if (response) {
+
+        let profileUpdate = await UpdateProfile(`${firstName} ${lastName}`)
+          .catch(error => console.log(error));
+
         setIsSignedUp(true);
-      }
+      };
+
+      setLoadingStatus(false);
     }
   }
 
