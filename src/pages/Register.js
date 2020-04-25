@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Image, TouchableOpacity, Text, Dimensions, StyleSheet, KeyboardAvoidingView, Keyboard, ActivityIndicator } from 'react-native';
-import { AppearanceProvider } from 'react-native-appearance';
+import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import { Linking } from 'expo';
 
 import { NameField, EmailField, NewPasswordField } from '../components/Fields';
@@ -11,6 +11,9 @@ const screenWidth = Math.round(Dimensions.get('screen').width);
 const screenHeight = Math.round(Dimensions.get('screen').height);
 
 export default function Register({ navigation }) {
+  const colorScheme = useColorScheme();
+  const themeContainer = colorScheme === "dark" ? styles.darkContainer : styles.lightContainer;
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -93,7 +96,7 @@ export default function Register({ navigation }) {
 
   return (
     <AppearanceProvider>
-      <KeyboardAvoidingView style={styles.container} behavior={"padding"} enabled >
+      <KeyboardAvoidingView style={[styles.container, themeContainer]} behavior={"padding"} enabled >
         <TouchableOpacity style={styles.logoContainer} onPress={() => Linking.openURL("https://www.inspiredtaste.net/38940/spaghetti-with-meat-sauce-recipe/")}>
           <Image style={styles.logo} source={require('../../assets/logo.jpg')} />
         </TouchableOpacity>
@@ -145,7 +148,12 @@ const styles = StyleSheet.create({
     width: screenWidth,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white",
+  },
+  darkContainer: {
+    backgroundColor: "#000000",
+  },
+  lightContainer: {
+    backgroundColor: "#ffffff"
   },
   logo: {
     height: 100,
