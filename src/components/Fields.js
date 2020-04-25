@@ -23,6 +23,27 @@ const NameField = (props) => {
   )
 }
 
+const UsernameField = (props) => {
+  return (
+    <View style={styles.fieldContainer}>
+      <TextInput style={[styles.field, styles.inputContainer]}
+        placeholder={props.placeholder ? props.placeholder : "Username"}
+        placeholderTextColor={props.placeholderTextColor ? props.placeholderTextColor : "gray"}
+        autoCorrect={false}
+        autoCapitalize={"none"}
+        textContentType={"username"}
+        onChangeText={props.onChangeText}
+        onSubmitEditing={props.onSubmitEditing}
+        keyboardType={"default"}
+        returnKeyType={"none"}
+        autoFocus={false}
+        blurOnSubmit={false}>
+      </TextInput>
+      <Text style={styles.errorText}>{props.message ? props.message : ""}</Text>
+    </View>
+  )
+}
+
 const EmailField = (props) => {
   // console.log(props);
   return (
@@ -132,4 +153,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { NameField, EmailField, PasswordField, NewPasswordField };
+export { NameField, UsernameField, EmailField, PasswordField, NewPasswordField };
