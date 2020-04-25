@@ -3,6 +3,7 @@ import { TextInput, Text, StyleSheet, Dimensions, Image, TouchableOpacity, Keybo
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import { Ionicons } from '@expo/vector-icons';
 import { Linking } from 'expo';
+import * as Haptics from 'expo-haptics';
 import * as ScreenOrientation from 'expo-screen-orientation';
 ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
 
@@ -56,11 +57,12 @@ export default function Login({ navigation }) {
           }
         });
 
-      setLoadingStatus(false);
-
       if (response) {
         setIsSignedIn(true);
+        Haptics.impactAsync();
       }
+
+      setLoadingStatus(false);
     }
   }
 

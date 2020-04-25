@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Image, TouchableOpacity, Text, Dimensions, StyleSheet, KeyboardAvoidingView, Keyboard, ActivityIndicator } from 'react-native';
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import { Linking } from 'expo';
+import * as Haptics from 'expo-haptics';
 
 import { NameField, EmailField, NewPasswordField } from '../components/Fields';
 import { SignUp, UpdateProfile } from '../components/Authenticate';
@@ -92,6 +93,7 @@ export default function Register({ navigation }) {
           .catch(error => console.log(error));
 
         setIsSignedUp(true);
+        Haptics.impactAsync();
       };
 
       setLoadingStatus(false);
