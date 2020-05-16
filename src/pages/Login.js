@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { TextInput, Text, StyleSheet, Dimensions, Image, TouchableOpacity, KeyboardAvoidingView, StatusBar, Keyboard, TouchableWithoutFeedback, View, ActivityIndicator } from 'react-native';
+import { Text, StyleSheet, Dimensions, Image, TouchableOpacity, KeyboardAvoidingView, StatusBar, Keyboard, TouchableWithoutFeedback, View, ActivityIndicator } from 'react-native';
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
-import { Ionicons } from '@expo/vector-icons';
 import { Linking } from 'expo';
 import * as Haptics from 'expo-haptics';
 import * as ScreenOrientation from 'expo-screen-orientation';
 ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+import { useNavigation } from '@react-navigation/native';
 
 import { SignIn } from '../components/Authenticate';
 import { EmailField, PasswordField } from '../components/Fields';
@@ -14,7 +14,9 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 console.log("Device dimensions:", screenWidth, screenHeight);
 
-export default function Login({ navigation }) {
+export default function Login(props) {
+  const navigation = useNavigation();
+
   const colorScheme = useColorScheme();
   const themeContainer = colorScheme === "dark" ? styles.darkContainer : styles.lightContainer;
   const themeStatusBar = colorScheme === "dark" ? "light-content" : "dark-content";
@@ -60,6 +62,9 @@ export default function Login({ navigation }) {
       if (response) {
         setIsSignedIn(true);
         Haptics.impactAsync();
+
+        const onSignInFunction = props.onSignIn;
+        onSignInFunction(response);
       }
 
       setLoadingStatus(false);
